@@ -1,0 +1,7 @@
+* text=auto eol=lf
+*.png binary
+*.jpg binary
+*.zip binary
+
+# Keep the archived exact0.32 Python bytes unchanged in Git.
+*.py -text

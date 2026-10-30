@@ -1,0 +1,17 @@
+{
+  "display_name": "Verbatim Harbor",
+  "implementation": "Context Weave / SourceTrail",
+  "version": "0.32.0",
+  "baseline_archive_sha256": "bff4443ee3cbdf4a5e320dfa56fb8e65ca7775d857550c4112de7ddb7a9c74fa",
+  "upstream_commit": "e84af580a3a9a21f1eab6328d41e8b93bb52552e",
+  "original_author": "王子铭 (Giorno-Banana)",
+  "license": "MIT",
+  "production_python_changed": false,
+  "endpoints": {
+    "add": "https://101.201.226.162/m01/add",
+    "search": "https://101.201.226.162/m01/search",
+    "health": "https://101.201.226.162/m01/health"
+  },
+  "github_repository": "https://github.com/GTYanita/verbatim-harbor",
+  "official_score_for_this_new_registration": null
+}
