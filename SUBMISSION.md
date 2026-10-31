@@ -8,9 +8,9 @@
 
 仓库：https://github.com/GTYanita/verbatim-harbor
 
-版本：v0.1；候选：selected-original-question-answer-pair-v9。固定 commit 在发布后补充。
+版本：v0.1；候选：selected-original-question-answer-pair-v9。固定源码以 RELEASE_IDENTITY.json 的部署归档SHA256及本仓库当前提交为准。
 
-Original Work：由参赛者自行补充；基础实现不列为本申请原创贡献。复用内容和全部修改单独披露于 PROVENANCE.md，LICENSE 保持。
+Original Work：本次方法改动是已选原文提问与相邻原助手回答的局部组织：同 session/request、位置相邻、提问不超过512字符且带问号，并含回答缺失的原查询词时，将最多一条已选完整提问移到该回答之前。保持原文字节和来源，不生成答案、不新增外部知识、不改变平台模型、提示或评分。基础检索、存储、选材和预算能力均为复用内容，不作为本申请原创贡献；原作者、许可证及全部方法修改见 PROVENANCE.md。此说明不主张学术首创性。
 
 Add：https://101.201.226.162/m01/add
 
@@ -26,4 +26,4 @@ Add/Search 使用已登记的 Token 鉴权，密钥不出现在仓库、URL、�
 
 本地完整有效评分仍有缺失，不宣称已证明准确率提升或 Full 成绩。Smoke 完成不代表 Full 容量或成绩保证。
 
-Full 受理前须完成信息补充与本人确认；受理后固定生产代码、版本、接口、依赖和配置，避免同一服务评测或部署冲突。
+Textual Full已受理：teval_cc46e8ef0571706c。参赛者已确认本次提交及本地评分缺项；受理后固定生产代码、版本、接口、依赖和配置，暂缓同服务Smoke。材料完整性与参赛资格仍以赛事方审核为准。
