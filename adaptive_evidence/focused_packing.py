@@ -148,8 +148,9 @@ def pack_evidence(index, ranked, budget, top_k, render, *, query, reserve_rules=
     for i in pool:
         include(i, budget)
 
+    from .selected_question_pairs import bind_selected_question
     output = []
-    for _, row in merged_rows(index, selected):
+    for _, row in bind_selected_question(index, merged_rows(index, selected), query):
         item = {'id':row['id'], 'content':render(row), 'score':1.0/(len(output)+1)}
         if row['timestamp'] is not None:
             item['created_at'] = datetime.fromtimestamp(row['timestamp']/1000, timezone.utc).isoformat()

@@ -1,27 +1,25 @@
-# Verbatim Harbor（原文港）
+# Verbatim Harbor（原文港）v0.1
 
-Public source for the m01 memory service, based on **Context Weave / SourceTrail 0.32.0**, originally authored by **王子铭 (Giorno-Banana)** and distributed under the [MIT license](LICENSE). Application contact: 高天翊. Repository account: GTYanita.
+参赛者：高天翊。所属单位：北京理工大学。仓库账号：GTYanita。
 
-This package preserves the exact0.32 production Python files. The new display name and deployment documentation do not represent a new retrieval algorithm or a verified score improvement. The current research candidate and its incomplete local evaluation are excluded.
+本仓库对应 m01 的冻结候选 `selected-original-question-answer-pair-v9`。系统保存原始记忆，结合向量与词法检索返回原文证据；统一 Answer、代码任务执行和评分由赛事平台负责。
 
-## Service
+## Original Work
 
-| API | Address |
+待参赛者自行补充。复用的基础实现不作为本申请的原创贡献；其作者、许可证、方法来源与本次修改见 [来源披露](PROVENANCE.md)。
+
+## 接口
+
+|接口|地址|
 |---|---|
-| POST Add | https://101.201.226.162/m01/add |
-| POST Search | https://101.201.226.162/m01/search |
-| GET Health | https://101.201.226.162/m01/health |
+|Add|https://101.201.226.162/m01/add|
+|Search|https://101.201.226.162/m01/search|
+|Health|https://101.201.226.162/m01/health|
 
-Add stores original text, roles, source offsets and available timestamps. Search combines text-embedding-v4 with lexical retrieval and deterministic original-evidence packing. Default mode is query_document_evidence, with a24000-character return budget and top_k≤100. The memory service makes no generative LLM call; final Answer/Judge belongs to the external evaluator.
+Add 同步持久化，以 user_id 隔离、request_id 幂等。同一 user_id 可跨 session_id 检索。Search 返回按证据优先顺序排列的 data 数组，条数不超过 top_k；无结果返回 {"data": []}。不把当前问题答案、选项或外部金标生成或拼接为记忆。
 
-Add/Search require the server private memory-system key. Health is public. Never commit keys, GitHub credentials, private environment files, databases, model weights or evaluation data.
+源码归档 SHA256：`7befac6e2c4b2dc0b7e31c7e78b8cb783bcf5ca7cd26397e53d88ef3078cf2e5`。仓库文档独立于该已冻结的部署归档，生产 Python 按逐文件哈希一致性核验。
 
-## Reproduction and attribution
+[部署](DEPLOYMENT.md) · [提交材料](SUBMISSION.md) · [方法来源和修改](PROVENANCE.md) · [MIT 许可证](LICENSE)
 
-- [Deployment and API registration notes](DEPLOYMENT.md)
-- [Unchanged original release README](README.exact32.md)
-- [Original method sources and release history](PROVENANCE.md)
-- [Frozen source identity](RELEASE_IDENTITY.json)
-- [Original MIT copyright and license](LICENSE)
-
-Install requirements.txt in a separate environment and follow DEPLOYMENT.md or the original startup instructions. Publishing this repository does not reconfigure the existing m01 host. There is no official score for this registration.
+仓库不包含凭据、环境私密文件、数据库、模型权重、评测题目或标准答案。Full 提交仍待参赛者补充说明并确认。

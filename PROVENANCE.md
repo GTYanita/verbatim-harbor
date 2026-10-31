@@ -1,3 +1,17 @@
+# 当前参赛版本的来源披露
+
+参赛者：高天翊（北京理工大学）；系统展示名 Verbatim Harbor v0.1。
+
+本候选复用王子铭（Giorno-Banana）的 Context Weave / SourceTrail 基础实现，MIT 许可。基础实现不是本申请人的原创贡献。上游提交 e84af580a3a9a21f1eab6328d41e8b93bb52552e，原归档 SHA256 bff4443ee3cbdf4a5e320dfa56fb8e65ca7775d857550c4112de7ddb7a9c74fa。
+
+本候选的全部生产改动仅为：新增 adaptive_evidence/selected_question_pairs.py，并在 adaptive_evidence/focused_packing.py 接入最终输出顺序调整。最多将一条已经选入的完整短用户提问移动至同次写入、紧邻的原助手回答前；不新增证据、查询、全历史画像、生成答案、模型调用或检索状态，不改变内部来源选择和预算。
+
+Original Work 的参赛者自述待本人补充。上述差异描述只用于复现和来源披露，不把全部基础功能声明为新方法。
+
+## 上游原始技术说明与方法引用（保留原作者记录）
+
+以下为随基础源码提供的原始技术说明；其中“本项目”“独立实现”等表述均指原作者的上游项目及其历史，不是本申请人的原创声明。为满足赛事要求，保留原作者、技术说明、论文/仓库引用和方法边界。
+
 # 来源与方法边界
 
 作者与维护者：王子铭（[Giorno-Banana](https://github.com/Giorno-Banana)）。本项目新代码采用 [MIT 许可证](LICENSE)。

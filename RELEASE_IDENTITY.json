@@ -1,17 +1,23 @@
 {
   "display_name": "Verbatim Harbor",
   "implementation": "Context Weave / SourceTrail",
-  "version": "0.32.0",
+  "version": "v0.1",
   "baseline_archive_sha256": "bff4443ee3cbdf4a5e320dfa56fb8e65ca7775d857550c4112de7ddb7a9c74fa",
   "upstream_commit": "e84af580a3a9a21f1eab6328d41e8b93bb52552e",
   "original_author": "王子铭 (Giorno-Banana)",
   "license": "MIT",
-  "production_python_changed": false,
+  "production_python_changed": true,
   "endpoints": {
     "add": "https://101.201.226.162/m01/add",
     "search": "https://101.201.226.162/m01/search",
     "health": "https://101.201.226.162/m01/health"
   },
   "github_repository": "https://github.com/GTYanita/verbatim-harbor",
-  "official_score_for_this_new_registration": null
+  "display_version": "v0.1",
+  "applicant": "高天翊",
+  "institution": "北京理工大学",
+  "candidate": "selected-original-question-answer-pair-v9",
+  "candidate_archive_sha256": "7befac6e2c4b2dc0b7e31c7e78b8cb783bcf5ca7cd26397e53d88ef3078cf2e5",
+  "Original_Work": "Pending participant supplement; reused base not claimed as own work",
+  "upstream_version": "0.32.0"
 }

@@ -1,29 +1,17 @@
-# m01 deployment
+# Verbatim Harbor v0.1：m01 部署
 
-Application display name: **Verbatim Harbor（原文港）**. The implementation is the unchanged Context Weave / SourceTrail 0.32.0 source by 王子铭 (Giorno-Banana), distributed under MIT. Keep LICENSE, PROVENANCE.md and README.exact32.md with every copy.
+独立源码目录：/opt/memory-lab/releases/m01/evidence-selected-question-v9-7befac6e2c4b
 
-## Public API
+服务：memory-lab@m01.service；后端端口：18101；Python 环境：/opt/memory-lab/venv；独立数据目录：/var/lib/memory-lab/m01。
 
-| Purpose | Endpoint |
-|---|---|
-| Add, POST | https://101.201.226.162/m01/add |
-| Search, POST | https://101.201.226.162/m01/search |
-| Health, GET | https://101.201.226.162/m01/health |
+配置使用 query_document_evidence、24000 字符返回预算和 text-embedding-v4（1024维）。Add/Search 鉴权凭据仅由运营者私密配置提供。Health 的底层软件版本字段继承上游，不代表参赛展示版本。
 
-The deployment supplied by the operator returned HTTP 200 and status=ok at its health endpoint on 2026-10-31 (Asia/Shanghai). It reported version 0.32.0, text-embedding-v4, raw_source Add, query_document_evidence Search, context_chars=24000 and no generative LLM in the memory service. This observation does not establish throughput, long-term availability or capacity.
+线上源码与本仓库 adaptive_evidence/ 的生产 Python 必须逐文件一致。共享 /opt/memory-lab/source 以及其他服务不属于本仓库部署目标。发布仓库不会自动改动线上服务。
 
-Add and Search authenticate with `Authorization: Token <MEMORY_API_KEY>`; the source also supports Bearer or X-Api-Key. Health is public. Add is synchronous; do not invent an asynchronous Add-status endpoint. The memory-system key must equal the private server-side MEMORY_API_KEY. Do not use a GitHub password or an AML eval_key for this field.
+同 user_id 跨 session_id 检索；不同 user_id 严格隔离。Add 在事务提交、缓存失效且可以立即 Search 后返回200；request_id 重试不重复写入，内容冲突返回409。
 
-## Reproduce on a separate host
+Full 前重新检查真实 admission、配额、活动任务、端点、TLS、源码、鉴权和容量。正式受理后不因结果不理想更换版本或撤回。运行中只读监控，保存终态结果及前后源码验证。
 
-Use a supported Python environment, install requirements.txt, and configure private environment values following env.example. Set an explicit separate AE_DATABASE, MEMORY_API_KEY, DASHSCOPE_API_KEY, and the account's correct AE_EMBEDDING_URL. Keep AE_MODE=query_document_evidence and AE_CONTEXT_CHARS=24000. No credentials, environment files or databases belong in Git.
+服务器资源快照和并发16的合成检查不能证明全部 Full 规模容量。官方数据库、源码包和模型资源须分别管理，不公开评测数据。按赛事数据保留规则处理副本和备份，不跨用户或团队共享。
 
-The Dockerfile starts the FastAPI application on port8000. Configure the reverse proxy to remove `/m01` before forwarding to this application. The container does not terminate TLS. Use a valid certificate covering the public endpoint. See README.exact32.md and start_local.ps1 for the original startup path; compose.yaml is inherited historical configuration and is not a claim about this m01 host.
-
-The supplied m01 host is managed separately. Publishing this repository does not deploy or reconfigure that host. The health response alone does not prove its running file hashes equal this repository; server-side release verification remains required.
-
-## Evaluation limits
-
-Return at most the caller's top_k (maximum100), within a 24000-character Search budget. This is the service's return budget, not a claim about the evaluator's final input limit. Start compatibility testing conservatively with Add/Search concurrency1 until the operator validates capacity.
-
-There is no official score for this new registration. Historical scores for other registrations do not transfer to this display name. No Smoke/Full evaluation, version binding or promotion is authorized by publishing this repository.
+本仓库使用继承的 MIT 实现；原作者和来源、修改清单见 PROVENANCE.md，版权和许可证见 LICENSE。
