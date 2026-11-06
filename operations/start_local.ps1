@@ -20,9 +20,10 @@ foreach ($configPath in $EnvFile) {
         [Environment]::SetEnvironmentVariable($settingName, $settingValue, 'Process')
     }
 }
-$projectPath = Split-Path -Parent $PSScriptRoot
+$repoPath = Split-Path -Parent $PSScriptRoot
+$projectPath = Split-Path -Parent $repoPath
 if (-not $PythonPath) {
-    $PythonPath = Join-Path $PSScriptRoot '.venv-cycle2\Scripts\python.exe'
+    $PythonPath = Join-Path $repoPath '.venv-cycle2\Scripts\python.exe'
     if (-not (Test-Path -LiteralPath $PythonPath)) { $PythonPath = 'python' }
 }
 $env:AE_EMBEDDING_BACKEND = $EmbeddingBackend
@@ -32,7 +33,7 @@ if ($EmbeddingBackend -eq 'bge') {
     throw 'Set DASHSCOPE_API_KEY and AE_EMBEDDING_URL before starting the Cycle 2 service.'
 }
 if (-not $env:AE_DATABASE) { throw 'Set an explicit, separate AE_DATABASE for this model profile.' }
-if (-not [IO.Path]::IsPathRooted($env:AE_DATABASE)) { $env:AE_DATABASE = Join-Path $PSScriptRoot $env:AE_DATABASE }
+if (-not [IO.Path]::IsPathRooted($env:AE_DATABASE)) { $env:AE_DATABASE = Join-Path $repoPath $env:AE_DATABASE }
 $env:AE_DATABASE = [IO.Path]::GetFullPath($env:AE_DATABASE)
 # This release has no generative Add/Search implementation, regardless of inherited flags.
 $env:AE_ADD_INDEXER = '0'
@@ -42,7 +43,7 @@ $env:AE_LOCAL_EVIDENCE_EXPAND = '0'
 $env:AE_DEVICE = $Device
 if ($PSBoundParameters.ContainsKey('Mode') -or -not $env:AE_MODE) { $env:AE_MODE = $Mode }
 if ($PSBoundParameters.ContainsKey('ContextChars') -or -not $env:AE_CONTEXT_CHARS) { $env:AE_CONTEXT_CHARS = [string]$ContextChars }
-$env:PYTHONPATH = $PSScriptRoot
+$env:PYTHONPATH = Join-Path $repoPath 'evidence_pipeline'
 if (-not $env:MEMORY_API_KEY) { throw 'Set MEMORY_API_KEY before starting the service.' }
 # Windows PowerShell treats uvicorn's normal stderr startup log as an error
 # record. Keep configuration validation strict, but let the native exit code

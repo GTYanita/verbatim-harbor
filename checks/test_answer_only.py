@@ -10,7 +10,7 @@ from unittest.mock import Mock, patch
 import httpx
 from fastapi.testclient import TestClient
 
-import preflight
+from tools import preflight
 from adaptive_evidence import api
 from adaptive_evidence.core import MemoryStore
 from adaptive_evidence.remote_encoder import DashScopeEncoder

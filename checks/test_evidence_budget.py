@@ -14,6 +14,9 @@ class EvidenceBudgetTests(unittest.TestCase):
                          'content':source_a[i*300:(i+1)*300],'role':'user','timestamp':None})
         rows.append({'id':'5','source_id':'b','start':0,'end':len(source_b),
                      'content':source_b,'role':'assistant','timestamp':1700000000000})
+        for row in rows:
+            row.update(session_id='fixture', request_id='fixture',
+                       position=0 if row['source_id']=='a' else 1)
         index=SimpleNamespace(rows=rows,neighbors={})
         render=lambda row:'['+row['role']+'] '+row['content']
         args=(index,[0,5,1,2,3,4],3000,20,render)
@@ -30,6 +33,7 @@ class EvidenceBudgetTests(unittest.TestCase):
     def test_direct_first_preserves_top_k_and_an_oversized_source_is_not_truncated(self):
         row={'id':'large','source_id':'a','start':0,'end':800,
              'content':'v'*800,'role':'user','timestamp':None}
+        row.update(session_id='fixture', request_id='fixture', position=0)
         index=SimpleNamespace(rows=[row],neighbors={})
         render=lambda r:'[user] '+r['content']
         self.assertEqual(pack_evidence(index,[0],700,1,render,query='v',direct_first=True),[])

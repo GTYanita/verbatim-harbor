@@ -18,7 +18,27 @@
   "institution": "北京理工大学",
   "candidate": "selected-original-question-answer-pair-v9",
   "candidate_archive_sha256": "7befac6e2c4b2dc0b7e31c7e78b8cb783bcf5ca7cd26397e53d88ef3078cf2e5",
-  "Original_Work": "本次方法改动是已选原文提问与相邻原助手回答的局部组织：同 session/request、位置相邻、提问不超过512字符且带问号，并含回答缺失的原查询词时，将最多一条已选完整提问移到该回答之前。保持原文字节和来源，不生成答案、不新增外部知识、不改变平台模型、提示或评分。基础检索、存储、选材和预算能力均为复用内容，不作为本申请原创贡献；原作者、许可证及全部方法修改见 PROVENANCE.md。此说明不主张学术首创性。",
   "upstream_version": "0.32.0",
-  "Full_evaluation_id": "teval_cc46e8ef0571706c"
+  "Full_evaluation_id": "teval_cc46e8ef0571706c",
+  "evaluation_source_commit": "a007726a4ee8e75bf0c4ff711992c91d9a4893e4",
+  "documentation_updated_on": "2026-11-05",
+  "documentation_only_update": true,
+  "production_bytes_unchanged_from_evaluation_source_commit": true,
+  "runtime_profile": {
+    "embedding_model": "text-embedding-v4",
+    "embedding_dimensions": 1024,
+    "embedding_batch_size": 10,
+    "generative_models_in_Add_Search": [],
+    "retrieval_mode": "query_document_evidence",
+    "context_chars": 24000,
+    "top_k_max": 100,
+    "add": "synchronous",
+    "namespace_boundary": "user_id",
+    "cross_session_search_within_user": true,
+    "idempotency_key": [
+      "user_id",
+      "request_id"
+    ]
+  },
+  "Full_status_source": "Official platform record; original task ID retained as historical receipt, no success or score asserted by this documentation update"
 }
